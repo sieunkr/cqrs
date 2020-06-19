@@ -22,10 +22,10 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "room_id", referencedColumnName = "id")
-    private Room room;
+    @AttributeOverrides(
+            @AttributeOverride(name = "id", column = @Column(name = "room_id"))
+    )
+    private RoomId roomId;
 
     @Column(name = "adults")
     private Long adults;
