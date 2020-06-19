@@ -27,6 +27,11 @@ public class Reservation {
     )
     private RoomId roomId;
 
+    @AttributeOverrides(
+            @AttributeOverride(name = "id", column = @Column(name = "customer_id"))
+    )
+    private CustomerId customerId;
+
     @Column(name = "adults")
     private Long adults;
 
@@ -43,9 +48,6 @@ public class Reservation {
     @Column(name = "check_out_date")
     private LocalDate checkOutDate;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    private Customer customer;
+
 
 }

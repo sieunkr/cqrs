@@ -7,15 +7,15 @@ import javax.persistence.Embeddable;
 
 @Getter
 @Embeddable
-public class RoomId {
+public class CustomerId {
 
-    @Column(name="room_id")
+    @Column(name="customer_id")
     private long id;
 
-    private RoomId() {
+    private CustomerId() {
     }
 
-    public RoomId(long id) {
+    public CustomerId(long id) {
         this.id = id;
     }
 }

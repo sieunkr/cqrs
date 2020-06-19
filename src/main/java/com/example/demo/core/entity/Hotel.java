@@ -24,4 +24,8 @@ public class Hotel {
     @Column(name = "city")
     private String city;
 
+    @NotNull
+    @Column(name = "name")
+    private String name;
+
 }

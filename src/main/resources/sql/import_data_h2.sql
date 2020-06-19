@@ -1,7 +1,7 @@
-INSERT INTO HOTEL (id, city)
+INSERT INTO HOTEL (id, city, name)
 VALUES
-  (1, 'SEOUL'),
-  (2, 'INCHON');
+  (1, 'SEOUL', 'A Hotel'),
+  (2, 'INCHON', 'B Hotel');
 
 INSERT INTO ROOM_TYPE (id, name)
 VALUES
@@ -20,4 +20,4 @@ VALUES
 
 INSERT INTO RESERVATION (id, room_id, adults, children, check_in_date, check_out_date, customer_id)
 VALUES
-  (1, 1, 2, 0, '2020-06-14', '2020-06-17', 1);
+  (1, 1, 2, 0, '2020-06-17', '2020-06-20', 1);
