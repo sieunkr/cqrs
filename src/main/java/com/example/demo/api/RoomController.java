@@ -1,6 +1,6 @@
 package com.example.demo.api;
 
-import com.example.demo.api.dto.RoomDTO;
+import com.example.demo.core.dto.RoomDTO;
 import com.example.demo.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

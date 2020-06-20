@@ -1,8 +1,7 @@
-package com.example.demo.core.cache;
+package com.example.demo.core.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
@@ -11,7 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Builder
 @Document(collection = "reservation")
-public class ReservationQuery {
+public class ReservationDTO {
 
     @Id
     private long id;

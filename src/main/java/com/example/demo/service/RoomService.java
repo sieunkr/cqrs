@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.api.dto.RoomDTO;
+import com.example.demo.core.dto.RoomDTO;
 import com.example.demo.core.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

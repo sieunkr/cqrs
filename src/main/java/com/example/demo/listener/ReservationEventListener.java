@@ -2,7 +2,7 @@ package com.example.demo.listener;
 
 import com.example.demo.core.entity.Reservation;
 import com.example.demo.core.event.ReservationEvent;
-import com.example.demo.service.ReservationCommandService;
+import com.example.demo.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -13,17 +13,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReservationEventListener {
 
-    private final ReservationCommandService reservationCommandService;
+    private final ReservationService reservationService;
 
     @EventListener
     public void update(ReservationEvent event) {
 
-        //event.getCustomerId();
-
-        List<Reservation> list = reservationCommandService.testByCustomerId(event.getCustomerId());
+        List<Reservation> list = reservationService.testByCustomerId(event.getCustomerId());
 
         list.forEach(reservation -> {
-            reservationCommandService.updateReservation(reservation.getId());
+            reservationService.updateReservation(reservation.getId());
         });
     }
 }

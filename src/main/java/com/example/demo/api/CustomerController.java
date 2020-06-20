@@ -1,7 +1,7 @@
 package com.example.demo.api;
 
-import com.example.demo.core.dto.ReservationDTO;
-import com.example.demo.service.ReservationService;
+import com.example.demo.core.dto.CustomerDTO;
+import com.example.demo.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,27 +11,21 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/reservation")
+@RequestMapping("/api/v1/customer")
 @RequiredArgsConstructor
-public class ReservationController {
+public class CustomerController {
 
-    private final ReservationService reservationService;
+    private final CustomerService customerService;
 
     @GetMapping
-    public ReservationDTO getReservation() {
-        return reservationService.getReservationInfoById();
+    public List<CustomerDTO> findAll() {
+        return customerService.findAll();
     }
+
 
     @GetMapping("/test")
     public String test(@RequestParam(name = "id") Long reservationId) {
-        reservationService.updateReservation(reservationId);
+        customerService.changeFullName(1l, "sieun", "kim");
         return "ok";
-
-    }
-
-    @GetMapping("/find")
-    public List<ReservationDTO> findAll() {
-        return reservationService.findAll();
-
     }
 }

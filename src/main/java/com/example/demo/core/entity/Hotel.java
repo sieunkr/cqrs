@@ -28,4 +28,7 @@ public class Hotel {
     @Column(name = "name")
     private String name;
 
+    public String getFullName() {
+        return this.city + " " + this.name;
+    }
 }

@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.api.dto.ReservationDTO;
-import com.example.demo.core.cache.ReservationQuery;
+import com.example.demo.core.dto.ReservationDTO;
 import com.example.demo.core.entity.Customer;
+import com.example.demo.core.entity.CustomerId;
 import com.example.demo.core.entity.Reservation;
 import com.example.demo.core.entity.Room;
 import com.example.demo.core.repository.CustomerRepository;
@@ -10,14 +10,15 @@ import com.example.demo.core.repository.ReservationQueryRepository;
 import com.example.demo.core.repository.ReservationRepository;
 import com.example.demo.core.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.scheduling.annotation.Async;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
-public class ReservationCommandService {
+public class ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final ReservationQueryRepository reservationQueryRepository;
@@ -32,41 +33,50 @@ public class ReservationCommandService {
 
         return ReservationDTO.builder()
                 .id(reservation.getId())
-                .hotel(room.getHotel().getCity() + " " + room.getHotel().getName())
+                .hotel(room.getHotel().getFullName())
                 .roomType(room.getRoomType().getName())
                 .adults(reservation.getAdults())
                 .children(reservation.getChildren())
                 .checkInDate(reservation.getCheckInDate())
                 .checkOutDate(reservation.getCheckOutDate())
-                .fullName(customer.getFirstName() + " " + customer.getLastName())
+                .fullName(customer.getFullName())
                 .phone(customer.getPhone())
                 .build();
     }
 
     public List<Reservation> testByCustomerId(long customerId) {
 
-        return reservationRepository.findByCustomerId(customerId);
+        return reservationRepository.findAllByCustomerId(new CustomerId(customerId));
     }
 
-    @Async
     public void updateReservation(long reservationId) {
 
-        Reservation reservation = reservationRepository.findById(1l).get();
+        Reservation reservation = reservationRepository.findById(reservationId).get();
         Room room = roomRepository.findById(reservation.getRoomId().getId()).get();
         Customer customer = customerRepository.findById(reservation.getCustomerId().getId()).get();
 
-        ReservationQuery reservationQuery = ReservationQuery.builder()
+        ReservationDTO reservationQuery = ReservationDTO.builder()
                 .id(reservation.getId())
-                .hotel(room.getHotel().getCity() + " " + room.getHotel().getName())
+                .hotel(room.getHotel().getFullName())
                 .roomType(room.getRoomType().getName())
                 .adults(reservation.getAdults())
                 .children(reservation.getChildren())
                 .checkInDate(reservation.getCheckInDate())
                 .checkOutDate(reservation.getCheckOutDate())
-                .fullName(customer.getFirstName() + " " + customer.getLastName())
+                .fullName(customer.getFullName())
                 .phone(customer.getPhone())
                 .build();
 
         reservationQueryRepository.save(reservationQuery);
+    }
+
+
+    public ReservationDTO findById(long id) {
+        return reservationQueryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException(""));
+    }
+
+    public List<ReservationDTO> findAll() {
+        return reservationQueryRepository.findAll();
     }
 }
