@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "CUSTOMER")
 @Getter
+@Setter
 @EqualsAndHashCode(callSuper = false)
 public class Customer {
 

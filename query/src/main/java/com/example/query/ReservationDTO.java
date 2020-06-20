@@ -1,10 +1,10 @@
-package com.example.demo.core.dto;
+package com.example.query;
 
 import lombok.Builder;
 import lombok.Getter;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import org.springframework.data.annotation.Id;
 import java.time.LocalDate;
 
 @Getter
@@ -23,9 +23,5 @@ public class ReservationDTO {
     private String fullName;
     private String phone;
     private String email;
-
-    public static ReservationDTO empty() {
-        return ReservationDTO.builder().build();
-    }
 
 }
