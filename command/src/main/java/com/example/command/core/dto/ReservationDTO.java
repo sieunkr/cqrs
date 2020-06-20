@@ -1,13 +1,14 @@
-package com.example.query;
+package com.example.command.core.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import org.springframework.data.annotation.Id;
 import java.time.LocalDate;
 
 @Getter
+@Builder
 @Document(collection = "reservation")
 public class ReservationDTO {
 
@@ -22,5 +23,9 @@ public class ReservationDTO {
     private String fullName;
     private String phone;
     private String email;
+
+    public static ReservationDTO empty() {
+        return ReservationDTO.builder().build();
+    }
 
 }

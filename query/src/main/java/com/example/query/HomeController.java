@@ -2,6 +2,7 @@ package com.example.query;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,11 +13,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HomeController {
 
-    private final ReservationQueryRepository queryRepository;
+    private final ReservationQueryService queryService;
 
     @GetMapping
     List<ReservationDTO> findAll() {
-        return queryRepository.findAll();
+        return queryService.findAll();
     }
+
+    @GetMapping("/today")
+    List<ReservationDTO> today() {
+        return queryService.findByToday();
+    }
+
+    @GetMapping("/{id}")
+    ReservationDTO findById(@PathVariable(name = "id") Long id) {
+        return queryService.findById(id);
+    }
+
+
 
 }
