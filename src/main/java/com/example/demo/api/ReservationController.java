@@ -1,8 +1,9 @@
 package com.example.demo.api;
 
 import com.example.demo.api.dto.ReservationDTO;
-import com.example.demo.core.cache.ReservationInfo;
-import com.example.demo.service.ReservationService;
+import com.example.demo.core.cache.ReservationQuery;
+import com.example.demo.service.ReservationCommandService;
+import com.example.demo.service.ReservationQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,23 +16,24 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReservationController {
 
-    private final ReservationService reservationService;
+    private final ReservationCommandService reservationCommandService;
+    private final ReservationQueryService reservationQueryService;
 
     @GetMapping
     public ReservationDTO getReservation() {
-        return reservationService.getReservationInfoById();
+        return reservationCommandService.getReservationInfoById();
     }
 
     @GetMapping("/test")
     public String test() {
-        reservationService.updateReservation();
+        reservationCommandService.updateReservation();
         return "ok";
 
     }
 
     @GetMapping("/find")
-    public List<ReservationInfo> findAll() {
-        return reservationService.findAll();
+    public List<ReservationQuery> findAll() {
+        return reservationQueryService.findAll();
 
     }
 }

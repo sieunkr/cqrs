@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Getter
 @Builder
 @Document(collection = "reservation")
-public class ReservationInfo {
+public class ReservationQuery {
 
     @Id
     private long id;

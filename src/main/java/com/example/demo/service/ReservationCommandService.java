@@ -1,26 +1,26 @@
 package com.example.demo.service;
 
 import com.example.demo.api.dto.ReservationDTO;
-import com.example.demo.core.cache.ReservationInfo;
+import com.example.demo.core.cache.ReservationQuery;
 import com.example.demo.core.entity.Customer;
-import com.example.demo.core.entity.CustomerId;
 import com.example.demo.core.entity.Reservation;
 import com.example.demo.core.entity.Room;
 import com.example.demo.core.repository.CustomerRepository;
-import com.example.demo.core.repository.ReservationInfoRepository;
+import com.example.demo.core.repository.ReservationQueryRepository;
 import com.example.demo.core.repository.ReservationRepository;
 import com.example.demo.core.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ReservationService {
+public class ReservationCommandService {
 
     private final ReservationRepository reservationRepository;
-    private final ReservationInfoRepository reservationInfoRepository;
+    private final ReservationQueryRepository reservationQueryRepository;
     private final RoomRepository roomRepository;
     private final CustomerRepository customerRepository;
 
@@ -43,13 +43,19 @@ public class ReservationService {
                 .build();
     }
 
-    public void updateReservation() {
+    public List<Reservation> testByCustomerId(long customerId) {
+
+        return reservationRepository.findByCustomerId(customerId);
+    }
+
+    @Async
+    public void updateReservation(long reservationId) {
 
         Reservation reservation = reservationRepository.findById(1l).get();
         Room room = roomRepository.findById(reservation.getRoomId().getId()).get();
         Customer customer = customerRepository.findById(reservation.getCustomerId().getId()).get();
 
-        ReservationInfo reservationInfo = ReservationInfo.builder()
+        ReservationQuery reservationQuery = ReservationQuery.builder()
                 .id(reservation.getId())
                 .hotel(room.getHotel().getCity() + " " + room.getHotel().getName())
                 .roomType(room.getRoomType().getName())
@@ -61,10 +67,6 @@ public class ReservationService {
                 .phone(customer.getPhone())
                 .build();
 
-        reservationInfoRepository.save(reservationInfo);
-    }
-
-    public List<ReservationInfo> findAll() {
-        return reservationInfoRepository.findAll();
+        reservationQueryRepository.save(reservationQuery);
     }
 }
