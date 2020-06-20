@@ -12,7 +12,6 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "ROOM_TYPE")
 @Getter
-@Setter
 @EqualsAndHashCode(callSuper = false)
 public class RoomType {
 

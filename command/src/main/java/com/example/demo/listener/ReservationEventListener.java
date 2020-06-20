@@ -18,7 +18,7 @@ public class ReservationEventListener {
     @EventListener
     public void update(ReservationEvent event) {
 
-        List<Reservation> list = reservationService.testByCustomerId(event.getCustomerId());
+        List<Reservation> list = reservationService.getReservationByCustomerId(event.getCustomerId());
 
         list.forEach(reservation -> {
             reservationService.updateReservation(reservation.getId());

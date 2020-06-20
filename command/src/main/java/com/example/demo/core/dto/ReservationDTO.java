@@ -22,5 +22,10 @@ public class ReservationDTO {
     private LocalDate checkOutDate;
     private String fullName;
     private String phone;
+    private String email;
+
+    public static ReservationDTO empty() {
+        return ReservationDTO.builder().build();
+    }
 
 }

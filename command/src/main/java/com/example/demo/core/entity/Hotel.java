@@ -1,6 +1,5 @@
 package com.example.demo.core.entity;
 
-import com.example.demo.core.entity.enums.RoomStatus;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,34 +9,25 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "CUSTOMER")
+@Table(name = "HOTEL")
 @Getter
-@Setter
 @EqualsAndHashCode(callSuper = false)
-public class Customer {
+public class Hotel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @Column(name = "first_name")
-    private String firstName;
+    @Size(min = 1, max = 15, message = "")
+    @Column(name = "city")
+    private String city;
 
     @NotNull
-    @Column(name = "last_name")
-    private String lastName;
-
-    @NotNull
-    @Column(name = "phone")
-    private String phone;
-
-    @NotNull
-    @Column(name = "email")
-    private String email;
+    @Column(name = "name")
+    private String name;
 
     public String getFullName() {
-        return this.firstName + " " + this.lastName;
+        return this.city + " " + this.name;
     }
-
 }

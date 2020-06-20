@@ -18,20 +18,18 @@ public class ReservationController {
     private final ReservationService reservationService;
 
     @GetMapping
-    public ReservationDTO getReservation() {
-        return reservationService.getReservationInfoById();
+    public ReservationDTO getReservation(@RequestParam(name = "id") Long reservationId) {
+        return reservationService.getReservationInfoById(reservationId);
     }
 
     @GetMapping("/test")
     public String test(@RequestParam(name = "id") Long reservationId) {
         reservationService.updateReservation(reservationId);
         return "ok";
-
     }
 
     @GetMapping("/find")
     public List<ReservationDTO> findAll() {
-        return reservationService.findAll();
-
+        return reservationService.queryFindAll();
     }
 }

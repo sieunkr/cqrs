@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "RESERVATION")
 @Getter
-@Setter
 @EqualsAndHashCode(callSuper = false)
 public class Reservation {
 
