@@ -17,12 +17,12 @@ public class ReservationController {
 
     @GetMapping
     public ReservationDTO getReservation(@RequestParam(name = "id") Long reservationId) {
-        return reservationService.getReservationInfoById(reservationId);
+        return reservationService.getReservationDTO(reservationId);
     }
 
     @GetMapping("/test")
     public String test(@RequestParam(name = "id") Long reservationId) {
-        reservationService.updateReservation(reservationId);
+        reservationService.updateReservationDTO(reservationId);
         return "ok";
     }
 }

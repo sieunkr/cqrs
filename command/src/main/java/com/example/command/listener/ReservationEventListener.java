@@ -21,7 +21,7 @@ public class ReservationEventListener {
         List<Reservation> list = reservationService.getReservationByCustomerId(event.getCustomerId());
 
         list.forEach(reservation -> {
-            reservationService.updateReservation(reservation.getId());
+            reservationService.updateReservationDTO(reservation.getId());
         });
     }
 }

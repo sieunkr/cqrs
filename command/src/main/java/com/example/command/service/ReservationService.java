@@ -25,27 +25,27 @@ import static com.example.command.exception.ExceptionMessage.*;
 public class ReservationService {
 
     private final ReservationCommandRepository reservationCommandRepository;
+    private final CustomerRepository customerRepository;
     private final ReservationQueryRepository reservationQueryRepository;
     private final RoomRepository roomRepository;
-    private final CustomerRepository customerRepository;
 
     public List<Reservation> getReservationByCustomerId(long customerId) {
 
         return reservationCommandRepository.findAllByCustomerId(new CustomerId(customerId));
     }
 
-    public ReservationDTO getReservationInfoById(long reservationId) {
+    public ReservationDTO getReservationDTO(long reservationId) {
 
-        return getDTO(reservationId);
+        return getReservationDTOImpl(reservationId);
     }
 
-    public void updateReservation(long reservationId) {
+    public void updateReservationDTO(long reservationId) {
 
-        ReservationDTO reservationDTO = getDTO(reservationId);
+        ReservationDTO reservationDTO = getReservationDTOImpl(reservationId);
         reservationQueryRepository.save(reservationDTO);
     }
 
-    private ReservationDTO getDTO(long reservationId) {
+    private ReservationDTO getReservationDTOImpl(long reservationId) {
 
         Assert.notNull(reservationId, "ReservationId must not be null");
 

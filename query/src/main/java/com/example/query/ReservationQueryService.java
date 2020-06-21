@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,8 +21,7 @@ public class ReservationQueryService {
     }
 
     public List<ReservationDTO> findByToday() {
-        LocalDate localDate = LocalDate.now();
-        Date today = Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-        return queryRepository.findByCheckInDateBeforeAndCheckOutDateAfter(today, today);
+        LocalDate yesterday = LocalDate.now().minusDays(1);
+        return queryRepository.findByCheckInDateAfter(yesterday);
     }
 }
