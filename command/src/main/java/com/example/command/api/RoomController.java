@@ -5,6 +5,7 @@ import com.example.command.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,9 +16,9 @@ public class RoomController {
     private final RoomService roomService;
 
     @GetMapping
-    public RoomDTO findById() {
+    public RoomDTO findById(@RequestParam(name = "id") Long roomId) {
 
-        return roomService.findById(1l);
+        return roomService.findById(roomId);
     }
 
 
