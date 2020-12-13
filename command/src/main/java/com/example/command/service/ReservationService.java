@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.example.command.exception.ExceptionMessage.*;
 
@@ -75,4 +76,12 @@ public class ReservationService {
                 .email(customer.getEmail())
                 .build();
     }
+
+
+
+
+    //아래 소스 코드는, Optional 연습을 위해 작성한 임시 코드..
+
+
+
 }

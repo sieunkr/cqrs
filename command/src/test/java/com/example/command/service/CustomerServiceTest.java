@@ -25,6 +25,49 @@ class CustomerServiceTest {
     }
 
     @Test
+    void testGetFullName() {
+
+        //given
+        String email = "sieunkr@gmail.com";
+        String expectedFullName = "eddy kim";
+
+        //when
+        String actualFullName = customerService.getFullName(email);
+
+        //then
+        assertEquals(actualFullName, expectedFullName);
+    }
+
+
+    @Test
+    void givenNonExistentMember_whenGetFullName_thenUnknown() {
+
+        //given
+        String email = "test@gmail.com";
+        String expectedFullName = "UNKNOWN";
+
+        //when
+        String actualFullName = customerService.getFullName(email);
+
+        //then
+        assertEquals(actualFullName, expectedFullName);
+    }
+
+
+    @Test
+    void givenNonExistentMember_whenGetFullName_thenResourceNotFoundException() {
+
+        //given
+        String email = "test@gmail.com";
+
+        //when
+        assertThrows(ResourceNotFoundException.class, () -> customerService.getFullName(email));
+
+    }
+
+
+
+    @Test
     void testCountByLastName() {
 
         //given

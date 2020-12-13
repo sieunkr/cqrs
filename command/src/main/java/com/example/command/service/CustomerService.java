@@ -66,7 +66,42 @@ public class CustomerService {
 
     //아래 소스 코드는, Optional 연습을 위해 작성한 임시 코드..
 
+    public String getFullName(final String email) {
 
+        Optional<String> optCustomer = customerRepository.findByEmail(email).map(Customer::getFullName);
+
+        /*
+        if(optCustomer.isPresent()) {
+            return optCustomer.get();
+        } else {
+            return "UNKNOWN";
+        }
+
+         */
+
+        //Pref
+        //return optCustomer.orElse("UNKNOWN");
+
+
+        //TODO:.. 확인
+        //orElse(new 객체) 이런 방식이라면, orElseGet 을 사용하는게 좋다!!
+
+
+
+        //avoid
+        /*
+        if(optCustomer.isPresent()) {
+            return optCustomer.get();
+        } else {
+            throw new ResourceNotFoundException(ExceptionMessage.RESOURCE_NOT_FOUND, email);
+        }
+
+         */
+
+        return optCustomer.orElseThrow(
+                () -> new ResourceNotFoundException(ExceptionMessage.RESOURCE_NOT_FOUND, email)
+        );
+    }
 
 
     public CustomerDTO findByEmail(final String email) {
@@ -173,8 +208,9 @@ public class CustomerService {
     public long countByLastName(final String lastName) {
 
         return customerRepository.findAll().stream()
+                .filter(c -> c.getLastName().equals(lastName))  //NullPointerException
                 //.filter(c -> Optional.ofNullable(c.getLastName()).orElse("unknown").equals(lastName))   //Item 12
-                .filter(c -> c.getLastName() != null && c.getLastName().equals(lastName))
+                //.filter(c -> c.getLastName() != null && c.getLastName().equals(lastName))
                 .count();
     }
 

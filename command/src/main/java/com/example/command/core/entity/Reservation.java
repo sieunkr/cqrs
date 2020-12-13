@@ -1,5 +1,6 @@
 package com.example.command.core.entity;
 
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "RESERVATION")
 @Getter
+@Builder
 @EqualsAndHashCode(callSuper = false)
 public class Reservation {
 
