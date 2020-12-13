@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @NoArgsConstructor
 public class ResourceNotFoundException extends RuntimeException {
 
-    public ResourceNotFoundException(ExceptionMessage message) {
-        super(message.getMessage());
+    public ResourceNotFoundException(ExceptionMessage message, String source) {
+        super(message.getMessage() + ":" + source);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.command.core.entity;
 
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -10,6 +11,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "HOTEL")
 @Getter
+@Builder
 @EqualsAndHashCode(callSuper = false)
 public class Hotel {
 

@@ -1,5 +1,6 @@
 package com.example.command.core.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,11 +19,9 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @Column(name = "first_name")
     private String firstName;
 
-    @NotNull
     @Column(name = "last_name")
     private String lastName;
 
@@ -31,11 +30,15 @@ public class Customer {
     private String phone;
 
     @NotNull
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
+    @Column(name = "status")
+    private String status;
+
+    @Transient
+    @JsonIgnore
     public String getFullName() {
         return this.firstName + " " + this.lastName;
     }
-
 }

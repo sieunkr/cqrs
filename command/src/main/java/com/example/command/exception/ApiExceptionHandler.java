@@ -19,17 +19,18 @@ public class ApiExceptionHandler {
 
         return SimpleResponse.builder()
                 .message(ex.getMessage())
-                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .status(HttpStatus.INTERNAL_SERVER_ERROR.name())
                 .build();
     }
 
+
     @ExceptionHandler(ResourceNotFoundException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public SimpleResponse handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
 
         return SimpleResponse.builder()
                 .message(ex.getMessage())
-                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .status(HttpStatus.BAD_REQUEST.name())
                 .build();
     }
 

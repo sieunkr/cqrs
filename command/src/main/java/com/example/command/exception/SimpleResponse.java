@@ -7,6 +7,6 @@ import lombok.Getter;
 @Builder
 public class SimpleResponse {
 
-    private int status;
+    private String status;
     private String message;
 }

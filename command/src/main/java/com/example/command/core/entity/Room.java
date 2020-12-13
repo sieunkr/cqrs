@@ -1,6 +1,7 @@
 package com.example.command.core.entity;
 
 import com.example.command.core.entity.enums.RoomStatus;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "ROOM")
 @Getter
+@Builder
 @EqualsAndHashCode(callSuper = false)
 public class Room {
 
