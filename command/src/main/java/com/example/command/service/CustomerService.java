@@ -66,21 +66,34 @@ public class CustomerService {
 
     //아래 소스 코드는, Optional 연습을 위해 작성한 임시 코드..
 
-    public String getFullName(final String email) {
 
-        Optional<String> optCustomer = customerRepository.findByEmail(email).map(Customer::getFullName);
+    public String getFullNameByEmail(final String email) {
+
+        Optional<String> optCustomer = //Optional.of("eddy kim");
+                customerRepository.findByEmail(email).map(Customer::getFullName);
+
+        return optCustomer.orElseThrow();
+    }
+
 
         /*
-        if(optCustomer.isPresent()) {
+        if (optCustomer.isPresent()) {
             return optCustomer.get();
         } else {
             return "UNKNOWN";
         }
 
+
+        return optCustomer.orElse("UNKNOWN");
+
+        if(optCustomer.isPresent()) {
+            return optCustomer.get();
+        } else {
+            throw new ResourceNotFoundException(ExceptionMessage.RESOURCE_NOT_FOUND, email);
+        }
+
          */
 
-        //Pref
-        //return optCustomer.orElse("UNKNOWN");
 
 
         //TODO:.. 확인
@@ -98,13 +111,20 @@ public class CustomerService {
 
          */
 
+        /*
         return optCustomer.orElseThrow(
                 () -> new ResourceNotFoundException(ExceptionMessage.RESOURCE_NOT_FOUND, email)
         );
-    }
+
+         */
+    //}
 
 
     public CustomerDTO findByEmail(final String email) {
+        return customerRepository.findByEmail(email)
+                .map(customer -> modelMapper.map(customer, CustomerDTO.class))
+                .orElseThrow();
+    }
 
         //return CustomerDTO.of(customerRepository.findByEmail(email));
 
@@ -133,6 +153,14 @@ public class CustomerService {
         } else {
             throw new ResourceNotFoundException(ExceptionMessage.RESOURCE_NOT_FOUND, email);
         }
+
+
+        Optional<Customer> optCustomer = customerRepository.findByEmail(email);
+        if(optCustomer.isPresent()) {
+            return modelMapper.map(optCustomer.get(), CustomerDTO.class);
+        } else {
+            return CustomerDTO.emptyCustomerDTO();
+        }
          */
 
 
@@ -157,13 +185,15 @@ public class CustomerService {
          */
 
 
-
+        /*
 
         Optional<Customer> optCustomer = customerRepository.findByEmail(email);
         return optCustomer.map(customer -> modelMapper.map(customer, CustomerDTO.class))
                 .orElseThrow(() -> new ResourceNotFoundException(ExceptionMessage.RESOURCE_NOT_FOUND, email));
 
 
+
+         */
 
         /*
         Optional<Customer> optCustomer = customerRepository.findByEmail(email);
@@ -203,12 +233,13 @@ public class CustomerService {
                 CustomerDTO.class);
 
          */
-    }
+    //}
 
     public long countByLastName(final String lastName) {
 
         return customerRepository.findAll().stream()
                 .filter(c -> c.getLastName().equals(lastName))  //NullPointerException
+                //.filter(c -> lastName.equals(c.getLastName())
                 //.filter(c -> Optional.ofNullable(c.getLastName()).orElse("unknown").equals(lastName))   //Item 12
                 //.filter(c -> c.getLastName() != null && c.getLastName().equals(lastName))
                 .count();

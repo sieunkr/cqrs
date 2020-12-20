@@ -32,7 +32,7 @@ class CustomerServiceTest {
         String expectedFullName = "eddy kim";
 
         //when
-        String actualFullName = customerService.getFullName(email);
+        String actualFullName = customerService.getFullNameByEmail(email);
 
         //then
         assertEquals(actualFullName, expectedFullName);
@@ -47,7 +47,7 @@ class CustomerServiceTest {
         String expectedFullName = "UNKNOWN";
 
         //when
-        String actualFullName = customerService.getFullName(email);
+        String actualFullName = customerService.getFullNameByEmail(email);
 
         //then
         assertEquals(actualFullName, expectedFullName);
@@ -61,7 +61,7 @@ class CustomerServiceTest {
         String email = "test@gmail.com";
 
         //when
-        assertThrows(ResourceNotFoundException.class, () -> customerService.getFullName(email));
+        assertThrows(ResourceNotFoundException.class, () -> customerService.getFullNameByEmail(email));
 
     }
 
